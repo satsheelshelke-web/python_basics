@@ -1,0 +1,84 @@
+print("Student Marks manager")
+
+students = []
+
+def add_students():
+    name = input('Enter name: ')
+
+    m = float(input('Math marks: '))
+    s = float(input('Science marks: '))
+    sst = float(input('SST marks: '))
+    
+    name = name
+    marks = [m, s, sst]
+
+    student = (name, marks)
+    students.append(student)
+
+    choice = input('Do you want to add more students? (yes/no): ')
+    
+    if choice.lower() == 'yes':
+        add_students()
+    else:
+        print('Finished adding students')
+
+
+
+
+
+def calculate_total(marks):
+    total = 0
+    for mark in marks:
+        total += mark
+    return total
+
+
+def calculate_average(marks):
+    total = calculate_total(marks)
+    average = total / len(marks)
+    return round(average,2)
+
+def highest_mark(marks):
+    highest = marks[0]
+    for mark in marks:
+        if highest < mark:
+            highest = mark
+    return highest
+
+
+
+def show_students():
+    if len(students) == 0:
+        print('No students added yet.')
+        return
+    print('\nStudent reports:')
+    for student in students:
+        name = student[0]
+        marks = student[1]
+
+        total = calculate_total(marks)
+        student_calculate_average = calculate_average(marks)
+        highest_marks = highest_mark(marks)
+            
+        print(name, '-->', marks, 'Total marks:', total, 'Average:', student_calculate_average, 'Highest mark:', highest_marks)
+
+
+
+while True:
+    print('\n**MENU**')
+    print('''1. Add students
+2. Show Students
+3. End
+             ''')
+
+    choice = (input("Enter choice: "))
+    if choice == "1":
+        add_students()
+
+    elif choice == "2":
+        show_students()
+
+    elif choice == "3":
+        break
+    else:
+        print('Invalid choice. Please try again.')
